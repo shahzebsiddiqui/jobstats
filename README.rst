@@ -57,7 +57,7 @@ For a complete list of options pass the ``--help`` option
     -a, --account         Display information on account shares that user
                           belongs to
 
-  Developed by Shahzeb Siddiqui <shahzeb.siddiqui@pfizer.com>
+  Developed by Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>
 
 ``jobstats.py`` will display running and pending jobs if you have any active
 jobs while running the command.

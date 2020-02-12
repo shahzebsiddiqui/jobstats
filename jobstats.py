@@ -116,7 +116,7 @@ def main():
     USER = os.getenv("USER")
 
     parser = argparse.ArgumentParser(description="slurm utility for display user job statistics, reporting, and account detail.",
-                                     epilog="Developed by Shahzeb Siddiqui <shahzeb.siddiqui@pfizer.com>")
+                                     epilog="Developed by Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>")
     parser.add_argument('-u', '--user', help="Select a user", choices=userlist, default=USER, metavar="USER")
     parser.add_argument('-S', '--start', help="Start Date Format: YYYY-MM-DD",
                         type=lambda d: datetime.strptime(d, '%Y-%m-%d'))
