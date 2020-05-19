@@ -2,9 +2,9 @@ JobStats
 ========
 
 
-``jobstats.py`` is a command line utility that reports slurm job statistics that can be useful
+``jobstats`` is a command line utility that reports slurm job statistics that can be useful
 for getting a summary of jobs, report of historical jobs, account information, fairshare, etc...
-``jobstats.py`` is a wrapper to few slurm commands like ``sacct``, ``squeue``, ``sreport`` to retrieve slurm
+``jobstats`` is a wrapper to few slurm commands like ``sacct``, ``squeue``, ``sreport`` to retrieve slurm
 accounting data.
 
 jobstats will report jobs completed, failed, cancelled and timeout including the default slurm account and
@@ -12,7 +12,7 @@ list of slurm accounts a user belongs to
 
 ::
 
-  [siddis14@delta-login1 ~]$ jobstats.py
+  $ jobstats
   User: siddis14
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
@@ -39,7 +39,7 @@ For a complete list of options pass the ``--help`` option
 
 ::
 
-  [siddis14@delta-login1 ~]$ jobstats.py --help
+  $ jobstats --help
   usage: jobstats.py [-h] [-u USER] [-S START] [-E END] [-j]
                      [--state {COMPLETED,FAILED,TIMEOUT,CANCELLED}] [-a]
 
@@ -64,7 +64,7 @@ jobs while running the command.
 
 ::
 
-  [siddis14@delta-login1 ~]$ jobstats.py
+  $ jobstats
   User: siddis14
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
@@ -107,7 +107,7 @@ is current day but this can be tweaked. To see a job summary use option ``-j`` o
 
 ::
 
-  [siddis14@delta-login1 ~]$ jobstats.py -j
+  $ jobstats -j
   User: siddis14
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
@@ -149,7 +149,7 @@ be current time.
 ::
 
 
-  [siddis14@delta-login1 ~]$ jobstats.py -j -S 2019-03-10
+  $ jobstats -j -S 2019-03-10
   User: siddis14
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
@@ -209,7 +209,7 @@ Shown below is a job summary for time window **2019-01-01** - **2019-01-10**
 
 ::
 
-  [siddis14@delta-login1 ~]$ jobstats.py -j -S 2019-01-01 -E 2019-01-10
+  $ jobstats -j -S 2019-01-01 -E 2019-01-10
   User: siddis14
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
@@ -242,7 +242,7 @@ Shown below is a job summary for time window **2019-01-01** - **2019-01-10**
   3561             medium          3        3 2019-01-05T18:00:28   00:16:41       3003 2019-01-05T18:00:28 2019-01-05T18:17:09  COMPLETED
 
 
-``jobstats.py`` can query historical jobs by the following job state
+``jobstats`` can query historical jobs by the following job state
 
 - **FAILED**
 - **COMPLETED**
@@ -253,7 +253,7 @@ This would be effective when used by start/end option as shown in query below
 
 ::
 
-  [siddis14@delta-login1 ~]$ jobstats.py --state FAILED -S 2019-01-01 -E 2019-02-01
+  $ jobstats --state FAILED -S 2019-01-01 -E 2019-02-01
   User: siddis14
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
@@ -294,7 +294,7 @@ This would be effective when used by start/end option as shown in query below
   6527          siddis14   hostname        viz     hpceng         30      1:0 2019-01-23T14:10:25   00:00:00 2019-01-23T14:10:25 2019-01-23T14:10:25     FAILED
 
 
-``jobstats.py`` defaults to current user but you can select a different user by using ``-u`` or ``--user`` option
+jobstats defaults to current user but you can select a different user by using ``-u`` or ``--user`` option
 and use all the above commands mentioned above.
 
 If you want to find user association to slurm account and fairshare usage you can use the ``-a`` option.
@@ -303,7 +303,7 @@ See below
 
 ::
 
-  $ jobstats.py -a -u watrok
+  $ jobstats -a -u watrok
   User: watrok
   Default Account: hpceng
   User is part of the following slurm accounts ['hpceng']
