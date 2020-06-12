@@ -13,9 +13,9 @@ list of slurm accounts a user belongs to
 ::
 
   $ jobstats
-  User: siddis14
-  Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User: shahzeb
+  Default Account: admin
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 38966329
   Number of Pending Jobs: 0
@@ -33,7 +33,7 @@ list of slurm accounts a user belongs to
   --------------------------------------------------------------------------------
     Cluster     Login     Proper Name         Account     Used   Energy
     --------- --------- --------------- --------------- -------- --------
-    slurm_cl+  siddis14        Siddiqui          hpceng       24        0
+    slurm_cl+  shahzeb        Siddiqui          admin       24        0
 
 For a complete list of options pass the ``--help`` option
 
@@ -65,9 +65,9 @@ jobs while running the command.
 ::
 
   $ jobstats
-  User: siddis14
-  Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User: shahzeb
+  Default Account: admin
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 38960679
   Number of Pending Jobs: 0
@@ -85,19 +85,19 @@ jobs while running the command.
   --------------------------------------------------------------------------------
     Cluster     Login     Proper Name         Account     Used   Energy
   --------- --------- --------------- --------------- -------- --------
-  slurm_cl+  siddis14        Siddiqui          hpceng       24        0
+  slurm_cl+  shahzeb        Siddiqui          hpceng       24        0
 
                               Running Jobs
   ________________________________________________________________________________
                JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-               19705    medium     wrap siddis14  R       0:04     13 c[013-020,022,037-038,040-041]
-               19704      long     wrap siddis14  R       0:11     13 c[001-013]
+               19705    medium     wrap shahzeb  R       0:04     13 c[001-013]
+               19704      long     wrap shahzeb  R       0:11     13 c[001-013]
 
                     Running + Pending Jobs
   ________________________________________________________________________________
                JOBID PARTITION PRIOR     NAME     USER    STATE       TIME  TIME_LIMIT  NODES CPUS   GRES           START_TIME     NODELIST(REASON)      QOS
-               19705    medium 10002     wrap siddis14  RUNNING       0:04     8:20:00     13  500 (null)  2019-03-27T14:48:24 c[013-020,022,037-038,040-041]   normal
-               19704      long 10002     wrap siddis14  RUNNING       0:11     8:20:00     13  500 (null)  2019-03-27T14:48:17           c[001-013]   normal
+               19705    medium 10002     wrap shahzeb  RUNNING       0:04     8:20:00     13  500 (null)  2019-03-27T14:48:24     c[001-013]          normal
+               19704      long 10002     wrap shahzeb  RUNNING       0:11     8:20:00     13  500 (null)  2019-03-27T14:48:17     c[001-013]          normal
 
 
 
@@ -108,9 +108,9 @@ is current day but this can be tweaked. To see a job summary use option ``-j`` o
 ::
 
   $ jobstats -j
-  User: siddis14
-  Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User: shahzeb
+  Default Account: admin
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 39028847
   Number of Pending Jobs: 0
@@ -128,7 +128,7 @@ is current day but this can be tweaked. To see a job summary use option ``-j`` o
   --------------------------------------------------------------------------------
     Cluster     Login     Proper Name         Account     Used   Energy
   --------- --------- --------------- --------------- -------- --------
-  slurm_cl+  siddis14        Siddiqui          hpceng       24        0
+  slurm_cl+  shahzeb        Siddiqui          admin       24        0
 
 
                          Today Job Summary
@@ -150,9 +150,9 @@ be current time.
 
 
   $ jobstats -j -S 2019-03-10
-  User: siddis14
-  Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User: shahzeb
+  Default Account: admin
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 39028847
   Number of Pending Jobs: 0
@@ -170,7 +170,7 @@ be current time.
   --------------------------------------------------------------------------------
     Cluster     Login     Proper Name         Account     Used   Energy
   --------- --------- --------------- --------------- -------- --------
-  slurm_cl+  siddis14        Siddiqui          hpceng       24        0
+  slurm_cl+  shahzeb        Siddiqui          admin       24        0
 
 
                          Today Job Summary
@@ -210,9 +210,9 @@ Shown below is a job summary for time window **2019-01-01** - **2019-01-10**
 ::
 
   $ jobstats -j -S 2019-01-01 -E 2019-01-10
-  User: siddis14
-  Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User: shahzeb
+  Default Account: admin
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 39023187
   Number of Pending Jobs: 0
@@ -230,7 +230,7 @@ Shown below is a job summary for time window **2019-01-01** - **2019-01-10**
   --------------------------------------------------------------------------------
     Cluster     Login     Proper Name         Account     Used   Energy
   --------- --------- --------------- --------------- -------- --------
-  slurm_cl+  siddis14        Siddiqui          hpceng       24        0
+  slurm_cl+  shahzeb        Siddiqui          admin       24        0
 
 
                          Today Job Summary
@@ -254,9 +254,9 @@ This would be effective when used by start/end option as shown in query below
 ::
 
   $ jobstats --state FAILED -S 2019-01-01 -E 2019-02-01
-  User: siddis14
-  Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User: shahzeb
+  Default Account: admin
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 39017527
   Number of Pending Jobs: 0
@@ -274,7 +274,7 @@ This would be effective when used by start/end option as shown in query below
   --------------------------------------------------------------------------------
     Cluster     Login     Proper Name         Account     Used   Energy
   --------- --------- --------------- --------------- -------- --------
-  slurm_cl+  siddis14        Siddiqui          hpceng       24        0
+  slurm_cl+  shahzeb        Siddiqui          admin       24        0
 
                               Start Date:  2019-01-01
                                 End Date:  2019-02-01
@@ -282,16 +282,16 @@ This would be effective when used by start/end option as shown in query below
   ________________________________________________________________________________
          JobID      User    JobName  Partition    Account  AllocCPUS ExitCode              Submit    Elapsed               Start                 End      State
   ------------ --------- ---------- ---------- ---------- ---------- -------- ------------------- ---------- ------------------- ------------------- ----------
-  3558          siddis14   io500.sh      short     hpceng          8      1:0 2019-01-04T16:30:15   00:00:01 2019-01-04T16:30:16 2019-01-04T16:30:17     FAILED
-  4777          siddis14 helloWorl+    express     hpceng         16    127:0 2019-01-14T14:38:36   00:00:07 2019-01-14T14:38:37 2019-01-14T14:38:44     FAILED
-  4778          siddis14 helloWorl+    express     hpceng         16    127:0 2019-01-14T14:40:05   00:00:01 2019-01-14T14:40:06 2019-01-14T14:40:07     FAILED
-  6487          siddis14 interacti+    express     hpceng          1    127:0 2019-01-22T19:12:44   00:00:10 2019-01-22T19:12:44 2019-01-22T19:12:54     FAILED
-  6490          siddis14 interacti+    express     hpceng          1      2:0 2019-01-22T19:27:55   00:00:09 2019-01-22T19:27:55 2019-01-22T19:28:04     FAILED
-  6518          siddis14   hostname        viz     hpceng          0      1:0 2019-01-23T14:06:01   00:00:00 2019-01-23T14:06:01 2019-01-23T14:06:01     FAILED
-  6519          siddis14   hostname        viz     hpceng          0      1:0 2019-01-23T14:06:09   00:00:00 2019-01-23T14:06:09 2019-01-23T14:06:09     FAILED
-  6520          siddis14   hostname        viz     hpceng          0      1:0 2019-01-23T14:06:25   00:00:00 2019-01-23T14:06:25 2019-01-23T14:06:25     FAILED
-  6521          siddis14   hostname        viz     hpceng          0      1:0 2019-01-23T14:06:38   00:00:00 2019-01-23T14:06:38 2019-01-23T14:06:38     FAILED
-  6527          siddis14   hostname        viz     hpceng         30      1:0 2019-01-23T14:10:25   00:00:00 2019-01-23T14:10:25 2019-01-23T14:10:25     FAILED
+  3558          shahzeb   io500.sh      short     admin          8      1:0 2019-01-04T16:30:15   00:00:01 2019-01-04T16:30:16 2019-01-04T16:30:17     FAILED
+  4777          shahzeb helloWorl+    express     admin         16    127:0 2019-01-14T14:38:36   00:00:07 2019-01-14T14:38:37 2019-01-14T14:38:44     FAILED
+  4778          shahzeb helloWorl+    express     admin         16    127:0 2019-01-14T14:40:05   00:00:01 2019-01-14T14:40:06 2019-01-14T14:40:07     FAILED
+  6487          shahzeb interacti+    express     admin          1    127:0 2019-01-22T19:12:44   00:00:10 2019-01-22T19:12:44 2019-01-22T19:12:54     FAILED
+  6490          shahzeb interacti+    express     admin          1      2:0 2019-01-22T19:27:55   00:00:09 2019-01-22T19:27:55 2019-01-22T19:28:04     FAILED
+  6518          shahzeb   hostname        viz     admin          0      1:0 2019-01-23T14:06:01   00:00:00 2019-01-23T14:06:01 2019-01-23T14:06:01     FAILED
+  6519          shahzeb   hostname        viz     admin          0      1:0 2019-01-23T14:06:09   00:00:00 2019-01-23T14:06:09 2019-01-23T14:06:09     FAILED
+  6520          shahzeb   hostname        viz     admin          0      1:0 2019-01-23T14:06:25   00:00:00 2019-01-23T14:06:25 2019-01-23T14:06:25     FAILED
+  6521          shahzeb   hostname        viz     admin          0      1:0 2019-01-23T14:06:38   00:00:00 2019-01-23T14:06:38 2019-01-23T14:06:38     FAILED
+  6527          shahzeb   hostname        viz     admin         30      1:0 2019-01-23T14:10:25   00:00:00 2019-01-23T14:10:25 2019-01-23T14:10:25     FAILED
 
 
 jobstats defaults to current user but you can select a different user by using ``-u`` or ``--user`` option
@@ -303,10 +303,10 @@ See below
 
 ::
 
-  $ jobstats -a -u watrok
-  User: watrok
+  $ jobstats -a -u user1
+  User: admin
   Default Account: hpceng
-  User is part of the following slurm accounts ['hpceng']
+  User is part of the following slurm accounts ['admin']
   User Raw Share: 100
   User Raw Usage: 38228406
   Number of Pending Jobs: 0
@@ -328,15 +328,10 @@ See below
 
 
 
-                        Shares for Account hpceng
+                        Shares for Account admin
                Account       User  RawShares  NormShares    RawUsage  EffectvUsage  FairShare
   -------------------- ---------- ---------- ----------- ----------- ------------- ----------
-  hpceng                                 200    0.076894   102749687      0.041010   0.690955
-   hpceng                dkenna29        100    0.010985           0      0.000000   1.000000
-   hpceng                    dtse        100    0.010985           0      0.000000   1.000000
-   hpceng                  labeln        100    0.010985    62482627      0.006693   0.655505
-   hpceng                  maiset        100    0.010985      663452      0.000265   0.983434
-   hpceng                siddis14        100    0.010985    38228406      0.006392   0.668093
-   hpceng                vpantazo        100    0.010985      420164      0.000168   0.989476
-   hpceng                  watrok        100    0.010985      955035      0.000381   0.976234
-
+  admin                             200    0.076894   102749687      0.041010   0.690955
+  admin                user1        100    0.010985           0      0.000000   1.000000
+  admin                shahzeb      100    0.010985    38228406      0.006392   0.668093
+   
