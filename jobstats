@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #MIT License
@@ -29,6 +29,8 @@ import subprocess
 import argparse
 import time
 from datetime import datetime
+import sys
+import platform
 
 def valid_date(s):
     """Date Field Format used in argparse."""
@@ -113,7 +115,7 @@ def job_state(USER,state,start=None,end=None):
 def main():
     """Start of main program."""
 
-    userlist = subprocess.check_output("sacctmgr list user -n --parsable2 format=user", shell=True).splitlines()
+    userlist = subprocess.check_output("sacctmgr list user -n --parsable2 format=user", shell=True).decode().splitlines()
     USER = os.getenv("USER")
 
     parser = argparse.ArgumentParser(description="slurm utility for display user job statistics, reporting, and account detail.",
@@ -234,5 +236,12 @@ def main():
         shares_by_account(user_accounts)
 
 
+def check_python_version():
+    """ Check the running python version """
+    if int(platform.python_version_tuple()[0]) < 3:
+        raise Exception("%s only compatible with Python 3.X version" % sys.argv[0])
+
+
 if __name__ == "__main__":
+    check_python_version()
     main()
