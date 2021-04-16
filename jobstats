@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 #MIT License
 
@@ -28,6 +29,8 @@ import subprocess
 import argparse
 import time
 from datetime import datetime
+import sys
+import platform
 
 def valid_date(s):
     """Date Field Format used in argparse."""
@@ -41,12 +44,12 @@ def valid_date(s):
 def shares_by_account(user_accounts):
     """Reports slurm share by accounts that user belongs to."""
     for account in user_accounts:
-        print "\n\n"
-        print "{:>40} {}".format("Shares for Account", account)
+        print("\n\n")
+        print("{:>40} {}".format("Shares for Account", account))
 
         cmd = "sshare -A {} -a".format(account)
-        out = subprocess.check_output(cmd,shell="True")
-        print out
+        out = subprocess.check_output(cmd,shell=True)
+        print(out.decode())
 
 def job_summary(USER,start=None,end=None):
     """Prints Job Summary for all Job State."""
@@ -59,12 +62,12 @@ def job_summary(USER,start=None,end=None):
     if end is not None:
         cmd += " -E " + end.strftime("%Y-%m-%d")
 
-    out = subprocess.check_output(cmd, shell="True")
+    out = subprocess.check_output(cmd, shell=True)
 
-    print
-    print '{:>40}'.format("Today Job Summary")
-    print '{:_<80}'.format('')
-    print(out)
+    print('')
+    print('{:>40}'.format("Today Job Summary"))
+    print('{:_<80}'.format(''))
+    print(out.decode())
 
 def job_state(USER,state,start=None,end=None):
     """Prints Job Summary by Job State."""
@@ -90,29 +93,29 @@ def job_state(USER,state,start=None,end=None):
         cmd += "-s CA"
 
 
-    print '{:>40} {}'.format("Start Date: ", startdate)
+    print('{:>40} {}'.format("Start Date: ", startdate))
     #  if end date is not Defined then only specify -S otherwise specify both -S and -E
     if end is None:
         cmd += " -S {} ".format(startdate)
     else:
         cmd += " -S {} -E {}".format(startdate,enddate)
-        print '{:>40} {}'.format("End Date: ", enddate)
+        print('{:>40} {}'.format("End Date: ", enddate))
 
-    print '{:>40} {} '.format("Job Summary by State:",state)
-    print '{:_<80}'.format('')
+    print('{:>40} {} '.format("Job Summary by State:",state))
+    print('{:_<80}'.format(''))
 
-    out = subprocess.check_output(cmd,shell="True")
+    out = subprocess.check_output(cmd, shell=True)
 
     count_cmd = cmd + " -n"
-    count_jobs = len(subprocess.check_output(count_cmd,shell="True").splitlines())
-    print out
-    print "Total Jobs: {}".format(count_jobs)
+    count_jobs = len(subprocess.check_output(count_cmd, shell=True).splitlines())
+    print(out.decode())
+    print("Total Jobs: {}".format(count_jobs))
 
 
 def main():
     """Start of main program."""
 
-    userlist = subprocess.check_output("sacctmgr list user -n --parsable2 format=user",shell="True").splitlines()
+    userlist = subprocess.check_output("sacctmgr list user -n --parsable2 format=user", shell=True).decode().splitlines()
     USER = os.getenv("USER")
 
     parser = argparse.ArgumentParser(description="slurm utility for display user job statistics, reporting, and account detail.",
@@ -143,85 +146,85 @@ def main():
 
     # Get default account for user
     cmd = "sacctmgr list user user={} --parsable2 -n format=DefaultAccount".format(USER)
-    default_account = subprocess.check_output(cmd,shell="True").strip()
+    default_account = subprocess.check_output(cmd, shell=True).strip()
 
     # Get all slurm accounts that user belongs to
     cmd = "sacctmgr list association user={} --parsable2 -n format=account".format(USER)
-    user_accounts = subprocess.check_output(cmd,shell="True").split()
+    user_accounts = subprocess.check_output(cmd, shell=True).split()
 
     #  Get user fair share details
     cmd = "sshare -U --parsable2 -n"
-    sshare = subprocess.check_output(cmd,shell="True").split("|")
+    sshare = str(subprocess.check_output(cmd, shell=True)).split("|")
     raw_share = sshare[2]
     raw_usage = sshare[4]
 
     cmd = "sreport user topusage -t Hours users={}".format(USER)
-    today_sreport = subprocess.check_output(cmd,shell="True")
+    today_sreport = subprocess.check_output(cmd, shell=True)
 
     # Get total jobs finished by user
     cmd = "sacct --allocations -n"
-    total_jobs = len(subprocess.check_output(cmd,shell="True").splitlines())
+    total_jobs = len(subprocess.check_output(cmd, shell=True).splitlines())
 
     today = datetime.today().strftime('%Y-%m-%d')
 
     # Get total COMPLETED jobs
     cmd = "sacct --allocations -s CD -n -u {} -S {}".format(USER,today)
-    completed_jobs = len(subprocess.check_output(cmd,shell="True").splitlines())
+    completed_jobs = len(subprocess.check_output(cmd, shell=True).splitlines())
 
     # Get total FAILED jobs
     cmd = "sacct --allocations -s F -n -u {} -S {}".format(USER,today)
-    failed_jobs = len(subprocess.check_output(cmd, shell="True").splitlines())
+    failed_jobs = len(subprocess.check_output(cmd, shell=True).splitlines())
 
     # Get total CANCELLED jobs
     cmd = "sacct --allocations -s CA -n -u {} -S {}".format(USER,today)
-    cancelled_jobs = len(subprocess.check_output(cmd, shell="True").splitlines())
+    cancelled_jobs = len(subprocess.check_output(cmd, shell=True).splitlines())
 
     # Get total TIMEOUT jobs
     cmd = "sacct --allocations -s TO -n -u {} -S {}".format(USER,today)
-    timeout_jobs = len(subprocess.check_output(cmd, shell="True").splitlines())
+    timeout_jobs = len(subprocess.check_output(cmd, shell=True).splitlines())
 
-    print "User: {} ".format(USER)
-    print "Default Account: {}".format(default_account)
-    print "User is part of the following slurm accounts {}".format(user_accounts)
-    print "User Raw Share: {}".format(raw_share)
-    print "User Raw Usage: {}".format(raw_usage)
-    print "Number of Pending Jobs: %d" % num_pend_jobs
-    print "Number of Running Jobs: %d" % num_running_jobs
-    print "Total Jobs Completed: {}".format(total_jobs)
-    print "Total Jobs Completed Successfully: {}".format(completed_jobs)
-    print "Total Jobs Failed: {}".format(failed_jobs)
-    print "Total Jobs Cancelled: {}".format(cancelled_jobs)
-    print "Total Jobs Timeout: {}".format(timeout_jobs)
-    print
+    print("User: {} ".format(USER))
+    print("Default Account: {}".format(default_account))
+    print("User is part of the following slurm accounts {}".format(user_accounts))
+    print("User Raw Share: {}".format(raw_share))
+    print("User Raw Usage: {}".format(raw_usage))
+    print("Number of Pending Jobs: %d" % num_pend_jobs)
+    print("Number of Running Jobs: %d" % num_running_jobs)
+    print("Total Jobs Completed: {}".format(total_jobs))
+    print("Total Jobs Completed Successfully: {}".format(completed_jobs))
+    print("Total Jobs Failed: {}".format(failed_jobs))
+    print("Total Jobs Cancelled: {}".format(cancelled_jobs))
+    print("Total Jobs Timeout: {}".format(timeout_jobs))
+    print('')
 
-    print "Today: {} sreport".format(time.strftime('%d/%m/%Y %H:%M:%S'))
+    print("Today: {} sreport".format(time.strftime('%d/%m/%Y %H:%M:%S')))
 
 
-    print today_sreport
+    print(today_sreport.decode())
 
     # print list of running jobs if any jobs running
     if num_running_jobs > 0:
-        print "{:>40}".format("Running Jobs")
-        print '{:_<80}'.format('')
+        print("{:>40}".format("Running Jobs"))
+        print('{:_<80}'.format(''))
         cmd = "squeue -u {} -t RUNNING".format(USER)
         out = subprocess.check_output(cmd, shell=True)
-        print out
+        print(out.decode())
 
     # print list of pending jobs if any jobs pending
     if num_pend_jobs > 0:
-        print "{:>40}".format("PENDING Jobs")
-        print '{:_<80}'.format('')
+        print("{:>40}".format("PENDING Jobs"))
+        print('{:_<80}'.format(''))
         cmd = "squeue -u {} -t PENDING".format(USER)
         out = subprocess.check_output(cmd, shell=True)
-        print out
+        print(out.decode())
 
     # print output of pending + running job if there is any pending/running jobs
     if num_pend_jobs + num_running_jobs > 0:
-        print "{:>40}".format("Running + Pending Jobs")
-        print '{:_<80}'.format('')
+        print("{:>40}".format("Running + Pending Jobs"))
+        print('{:_<80}'.format(''))
         cmd = 'squeue -o "%.18i %.9P %.5Q %.8j %.8u %.8T %.10M %.11l %.6D %.4C %.6b %.20S %.20R %.8q" -u {}'.format(USER)
-        out = subprocess.check_output(cmd,shell="True")
-        print out
+        out = subprocess.check_output(cmd, shell=True)
+        print(out.decode())
 
     if args.jobsummary:
         job_summary(USER,args.start,args.end)
@@ -233,5 +236,12 @@ def main():
         shares_by_account(user_accounts)
 
 
+def check_python_version():
+    """ Check the running python version """
+    if int(platform.python_version_tuple()[0]) < 3:
+        raise Exception("%s only compatible with Python 3.X version" % sys.argv[0])
+
+
 if __name__ == "__main__":
+    check_python_version()
     main()
