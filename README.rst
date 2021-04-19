@@ -7,6 +7,45 @@ for getting a summary of jobs, report of historical jobs, account information, f
 ``jobstats`` is a wrapper to few slurm commands like ``sacct``, ``squeue``, ``sreport`` to retrieve slurm
 accounting data.
 
+Setup
+-------
+
+To get started, please clone this repo::
+
+  git clone https://github.com/shahzebsiddiqui/jobstats.git
+  
+You will need a python 3.x or higher to run jobstats.
+
+You may want to add jobstats to your $PATH::
+
+  cd jobstats
+  export PATH=$PWD:$PATH
+
+Documentation
+---------------
+
+You can run ``--help`` option to see available options for jobstats program::
+
+  $ jobstats --help
+  usage: jobstats.py [-h] [-u USER] [-S START] [-E END] [-j]
+                     [--state {COMPLETED,FAILED,TIMEOUT,CANCELLED}] [-a]
+
+  slurm utility for display user job statistics, reporting, and account detail.
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    -u USER, --user USER  Select a user
+    -S START, --start START
+                          Start Date Format: YYYY-MM-DD
+    -E END, --end END     End Date Format: YYYY-MM-DD
+    -j, --jobsummary      Display job summary for user
+    --state {COMPLETED,FAILED,TIMEOUT,CANCELLED}
+                          Filter by Job State
+    -a, --account         Display information on account shares that user
+                          belongs to
+
+  Developed by Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>
+  
 jobstats will report jobs completed, failed, cancelled and timeout including the default slurm account and
 list of slurm accounts a user belongs to
 
@@ -35,34 +74,8 @@ list of slurm accounts a user belongs to
     --------- --------- --------------- --------------- -------- --------
     slurm_cl+  shahzeb        Siddiqui          admin       24        0
 
-For a complete list of options pass the ``--help`` option
-
-::
-
-  $ jobstats --help
-  usage: jobstats.py [-h] [-u USER] [-S START] [-E END] [-j]
-                     [--state {COMPLETED,FAILED,TIMEOUT,CANCELLED}] [-a]
-
-  slurm utility for display user job statistics, reporting, and account detail.
-
-  optional arguments:
-    -h, --help            show this help message and exit
-    -u USER, --user USER  Select a user
-    -S START, --start START
-                          Start Date Format: YYYY-MM-DD
-    -E END, --end END     End Date Format: YYYY-MM-DD
-    -j, --jobsummary      Display job summary for user
-    --state {COMPLETED,FAILED,TIMEOUT,CANCELLED}
-                          Filter by Job State
-    -a, --account         Display information on account shares that user
-                          belongs to
-
-  Developed by Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>
-
-``jobstats.py`` will display running and pending jobs if you have any active
-jobs while running the command.
-
-::
+``jobstats`` will display running and pending jobs if you have any active
+jobs while running the command.::
 
   $ jobstats
   User: shahzeb
@@ -101,11 +114,9 @@ jobs while running the command.
 
 
 
-``jobstats.py`` can give you a summary of jobs completed, the default  time window
+``jobstats`` can give you a summary of jobs completed, the default  time window
 is current day but this can be tweaked. To see a job summary use option ``-j`` or
-``--jobsummary``
-
-::
+``--jobsummary``::
 
   $ jobstats -j
   User: shahzeb
@@ -147,7 +158,6 @@ If ``--start`` is specified without ``--end`` option then end time window will
 be current time.
 
 ::
-
 
   $ jobstats -j -S 2019-03-10
   User: shahzeb
@@ -205,7 +215,7 @@ be current time.
   19704              long        500       13 2019-03-27T14:48:17   00:01:11      35500 2019-03-27T14:48:17 2019-03-27T14:49:28  COMPLETED
   19705            medium        500       13 2019-03-27T14:48:24   00:01:11      35500 2019-03-27T14:48:24 2019-03-27T14:49:35  COMPLETED
 
-Shown below is a job summary for time window **2019-01-01** - **2019-01-10**
+Shown below is a job summary for time window **2019-01-01** - **2019-01-10**.
 
 ::
 
@@ -298,8 +308,6 @@ jobstats defaults to current user but you can select a different user by using `
 and use all the above commands mentioned above.
 
 If you want to find user association to slurm account and fairshare usage you can use the ``-a`` option.
-
-See below
 
 ::
 
