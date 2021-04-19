@@ -151,11 +151,12 @@ def main():
 
     # Get default account for user
     cmd = "sacctmgr list user user={} --parsable2 -n format=DefaultAccount".format(USER)
-    default_account = subprocess.check_output(cmd, shell=True).strip()
+    default_account = subprocess.check_output(cmd, shell=True).strip().decode()
 
     # Get all slurm accounts that user belongs to
     cmd = "sacctmgr list association user={} --parsable2 -n format=account".format(USER)
     user_accounts = subprocess.check_output(cmd, shell=True).split()
+    user_accounts = [user.decode() for user in user_accounts]
 
     #  Get user fair share details
     cmd = "sshare -U --parsable2 -n"
