@@ -32,6 +32,8 @@ from datetime import datetime
 import sys
 import platform
 
+JOBSTATS_VERSION = "0.2"
+
 def valid_date(s):
     """Date Field Format used in argparse."""
     try:
@@ -119,6 +121,7 @@ def main():
     USER = os.getenv("USER")
 
     parser = argparse.ArgumentParser(description="slurm utility for display user job statistics, reporting, and account detail.",
+                                     prog="jobstats",
                                      epilog="Developed by Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>")
     parser.add_argument('-u', '--user', help="Select a user", choices=userlist, default=USER, metavar="USER")
     parser.add_argument('-S', '--start', help="Start Date Format: YYYY-MM-DD",
@@ -129,6 +132,8 @@ def main():
     parser.add_argument("--state", help="Filter by Job State", choices=["COMPLETED","FAILED","TIMEOUT","CANCELLED"])
     parser.add_argument("-a", "--account", help="Display information on account shares that user belongs to",
                         action="store_true")
+    parser.add_argument("-v", "--version", help="Print version", action="version", version=f"%(prog)s version {JOBSTATS_VERSION}" )
+
     args = parser.parse_args()
 
     # if -u was specified update USER variable and use this for querying all slurm commands

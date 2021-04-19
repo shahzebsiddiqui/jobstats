@@ -27,8 +27,7 @@ Documentation
 You can run ``--help`` option to see available options for jobstats program::
 
   $ jobstats --help
-  usage: jobstats.py [-h] [-u USER] [-S START] [-E END] [-j]
-                     [--state {COMPLETED,FAILED,TIMEOUT,CANCELLED}] [-a]
+  usage: jobstats [-h] [-u USER] [-S START] [-E END] [-j] [--state {COMPLETED,FAILED,TIMEOUT,CANCELLED}] [-a] [-v]
 
   slurm utility for display user job statistics, reporting, and account detail.
 
@@ -41,10 +40,11 @@ You can run ``--help`` option to see available options for jobstats program::
     -j, --jobsummary      Display job summary for user
     --state {COMPLETED,FAILED,TIMEOUT,CANCELLED}
                           Filter by Job State
-    -a, --account         Display information on account shares that user
-                          belongs to
+    -a, --account         Display information on account shares that user belongs to
+    -v, --version         Print version
 
   Developed by Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>
+  
   
 jobstats will report jobs completed, failed, cancelled and timeout including the default slurm account and
 list of slurm accounts a user belongs to
