@@ -32,7 +32,7 @@ from datetime import datetime
 import sys
 import platform
 
-JOBSTATS_VERSION = 0.2
+JOBSTATS_VERSION = "0.2"
 
 def valid_date(s):
     """Date Field Format used in argparse."""
@@ -132,7 +132,7 @@ def main():
     parser.add_argument("--state", help="Filter by Job State", choices=["COMPLETED","FAILED","TIMEOUT","CANCELLED"])
     parser.add_argument("-a", "--account", help="Display information on account shares that user belongs to",
                         action="store_true")
-    parer.add_argument("-v", "--version", help="Print version", version=f"%{prog} version {JOBSTAT_VERSION}" )
+    parser.add_argument("-v", "--version", help="Print version", action="version", version=f"%(prog)s version {JOBSTATS_VERSION}" )
 
     args = parser.parse_args()
 
