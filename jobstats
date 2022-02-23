@@ -132,7 +132,7 @@ def main():
     parser.add_argument("--state", help="Filter by Job State", choices=["COMPLETED","FAILED","TIMEOUT","CANCELLED"])
     parser.add_argument("-a", "--account", help="Display information on account shares that user belongs to",
                         action="store_true")
-    parser.add_argument("-v", "--version", help="Print version", action="version", version="%(prog)s version %s" % JOBSTATS_VERSION )
+    parser.add_argument("-v", "--version", help="Print version", action="version", version="%(prog)s version {}".format(JOBSTATS_VERSION) )
 
     args = parser.parse_args()
 
